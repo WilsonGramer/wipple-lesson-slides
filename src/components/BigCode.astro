@@ -1,0 +1,15 @@
+<div>
+    <slot />
+</div>
+
+<style>
+    @reference "tailwindcss";
+
+    div {
+        @apply block w-full text-center text-4xl;
+
+        :global(pre) {
+            @apply inline-block border-0;
+        }
+    }
+</style>

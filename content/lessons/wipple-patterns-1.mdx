@@ -1,0 +1,184 @@
+---
+title: Patterns in Wipple
+---
+
+import BigCode from "@/components/BigCode.astro"
+
+<section>
+    # Patterns in Wipple
+
+    Wipple and other functional programming languages use **patterns** to structure and make decisions about data. We'll spend the next two weeks on patterns.
+
+    Thinking with patterns will take some getting used to, but understanding how they work is rewarding — knowing how to plan and architect data structures is a valuable skill no matter which languages you use in the future.
+</section>
+
+<section>
+    # Creating patterns
+
+    In Wipple, a pattern is one **option** or **possibility** for a value. To list all the possibilities, you use the `type` keyword:
+
+    <aside>
+        ```wipple
+        -- List all the possible shapes we want to describe
+        Shape : type {
+            Triangle
+            Circle
+            Square
+        }
+
+        -- Give the `my-shape` variable the value `Triangle`
+        my-shape : Triangle
+        ```
+    </aside>
+</section>
+
+<section>
+    `Shape` is capitalized and represents a name for our group of patterns.
+
+    <aside>
+        ```wipple {2}
+        -- List all the possible shapes we want to describe
+        Shape : type {
+            Triangle
+            Circle
+            Square
+        }
+
+        -- Give the `my-shape` variable the value `Triangle`
+        my-shape : Triangle
+        ```
+    </aside>
+</section>
+
+<section>
+    `Triangle`, `Circle`, and `Square` are individual *values*, just like a number or a string.
+
+    <aside>
+        ```wipple {3-5,9}
+        -- List all the possible shapes we want to describe
+        Shape : type {
+            Triangle
+            Circle
+            Square
+        }
+
+        -- Give the `my-shape` variable the value `Triangle`
+        my-shape : Triangle
+        ```
+    </aside>
+</section>
+
+<section>
+    # Matching patterns
+
+    Even though we wrote `Triangle` in the example above, Wipple **only remembers that `my-shape` is a `Shape`** — Wipple treats `Triangle`, `Circle`, and `Square` as interchangeable. Because of this, if you want to do something with a shape (eg. display it on the screen with `show`), you have to check _every possibility_.
+
+    <aside>
+        ```wipple
+        -- Wipple forgets `Triangle` and only remembers `Shape`
+        my-shape : Triangle
+        ```
+    </aside>
+</section>
+
+<section>
+    Wipple has a built-in keyword named `when` that checks each possibility for us. Similar to `if`, we can run different code depending on which pattern is present.
+
+    <aside>
+        <BigCode>
+            ```wipple
+            when
+            ```
+        </BigCode>
+    </aside>
+</section>
+
+<section>
+    There are 3 steps to using `when`:
+
+    1. Write `when my-shape` (or whichever variable you want to check).
+
+    <aside>
+        ```wipple {9}
+        Shape : type {
+            Triangle
+            Circle
+            Square
+        }
+
+        my-shape : Triangle
+
+        when my-shape {
+            Triangle -> show "It's a triangle ▲"
+            Circle -> show "It's a circle ●"
+            Square -> show "It's a square ■"
+        }
+        ```
+    </aside>
+</section>
+
+<section>
+    2. Look at the `Shape` type to see all the possible patterns.
+
+    <aside>
+        ```wipple {1-5}
+        Shape : type {
+            Triangle
+            Circle
+            Square
+        }
+
+        my-shape : Triangle
+
+        when my-shape {
+            Triangle -> show "It's a triangle ▲"
+            Circle -> show "It's a circle ●"
+            Square -> show "It's a square ■"
+        }
+        ```
+    </aside>
+</section>
+
+<section>
+    3. Between braces (`{ }`), create one **function** for each possibility. The parameter is the pattern to match.
+
+    <aside>
+        ```wipple {10-12}
+        Shape : type {
+            Triangle
+            Circle
+            Square
+        }
+
+        my-shape : Triangle
+
+        when my-shape {
+            Triangle -> show "It's a triangle ▲"
+            Circle -> show "It's a circle ●"
+            Square -> show "It's a square ■"
+        }
+        ```
+    </aside>
+</section>
+
+<section>
+    Since `my-shape` stores `Triangle`, `when` chooses the first function.
+
+    <aside>
+        ```
+        It's a triangle ▲
+        ```
+    </aside>
+</section>
+
+<section>
+    # Keep reading!
+
+    The documentation contains more examples, like replacing `if` with `when` and combining patterns with information. Keep reading there!
+
+    [Link to documentation ->](https://gist.github.com/WilsonGramer/1a6dc51182e490f06b33c57debd3a6d3)
+
+    <aside>
+        <span class="text-8xl text-center w-full inline-block">🧑‍💻</span>
+    </aside>
+</section>

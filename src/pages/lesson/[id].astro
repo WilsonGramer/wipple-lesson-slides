@@ -1,0 +1,122 @@
+---
+import Stepper from "@/components/Stepper.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+    const lessons = await getCollection("lessons");
+
+    return lessons.map((lesson) => ({
+        params: { id: lesson.id },
+        props: { lesson },
+    }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+---
+
+<Layout title={lesson.data.title}>
+    <main>
+        <h1>{lesson.data.title}</h1>
+
+        <Stepper>
+            <Content />
+        </Stepper>
+    </main>
+</Layout>
+
+<style>
+    @reference "tailwindcss";
+
+    main {
+        @apply flex h-screen w-full flex-col p-4 pb-0;
+    }
+
+    h1 {
+        @apply m-0 text-center text-lg;
+    }
+</style>
+
+<style is:global>
+    @reference "tailwindcss";
+
+    @layer base {
+        :root {
+            --paragraph-spacing: 1rem;
+        }
+
+        h1,
+        h2,
+        h3 {
+            @apply mt-5 mb-2.5 font-semibold;
+        }
+
+        h1 {
+            @apply text-2xl;
+        }
+
+        h2 {
+            @apply text-xl;
+        }
+
+        h3 {
+            @apply text-lg;
+        }
+
+        p {
+            @apply mb-(--paragraph-spacing) text-base leading-[175%];
+        }
+
+        code:not(pre > code) {
+            @apply rounded-md border-2 border-current/10 px-1;
+        }
+
+        pre:has(code) {
+            @apply rounded-md border-2 border-gray-100 p-4;
+
+            &:has(.highlighted) {
+                .line.highlighted {
+                    @apply inline-block w-full bg-blue-100;
+                }
+
+                .line:not(.highlighted) {
+                    @apply opacity-30;
+                }
+            }
+        }
+
+        ul,
+        ol {
+            @apply ms-6 flex list-outside flex-col;
+
+            &:is(li > &) {
+                @apply mt-(--paragraph-spacing);
+
+                &:not(:last-child) {
+                    @apply mb-(--paragraph-spacing);
+                }
+            }
+        }
+
+        ul {
+            @apply list-disc;
+        }
+
+        ol {
+            @apply list-decimal;
+        }
+
+        li {
+            @apply pl-2;
+
+            &:not(li > * > li:last-child) {
+                @apply mb-(--paragraph-spacing);
+            }
+        }
+
+        a {
+            @apply relative font-medium whitespace-nowrap text-blue-500 underline underline-offset-2;
+        }
+    }
+</style>

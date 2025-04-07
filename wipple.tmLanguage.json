@@ -1,0 +1,48 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "wipple",
+    "scopeName": "source.wipple",
+    "patterns": [
+        {
+            "name": "comment.line",
+            "match": "--.*"
+        },
+        {
+            "name": "string",
+            "match": "\"[^\"]*\""
+        },
+        {
+            "name": "constant.numeric",
+            "match": "(?<![\\.\\d])[+\\-]?(?:[\\.\\d])+(?!\\-)(?![\\.\\d])"
+        },
+        {
+            "name": "keyword.operator",
+            "match": "(?:and|as|to|by|<=|>=|\\/=|is|or|\\x2d>|\\^|\\*|\\/|%|\\+|\\x2d|<|>|=|\\.)(?!(?:[\\.\\d]|(?:and|as|to|by|<=|>=|\\/=|is|or|\\x2d>|\\^|\\*|\\/|%|\\+|\\x2d|<|>|=|\\.)))"
+        },
+        {
+            "name": "punctuation.separator",
+            "match": "(?:;|,)(?!(?:[\\.\\d]|(?:and|as|to|by|<=|>=|\\/=|is|or|\\x2d>|\\^|\\*|\\/|%|\\+|\\x2d|<|>|=|\\.)))"
+        },
+        {
+            "name": "keyword",
+            "match": "(?:where|=>|::|:)(?!(?:[\\.\\d]|(?:and|as|to|by|<=|>=|\\/=|is|or|\\x2d>|\\^|\\*|\\/|%|\\+|\\x2d|<|>|=|\\.)))"
+        },
+        {
+            "name": "keyword",
+            "match": "(?:intrinsic|instance|default|infer|trait|type|when|set|do|_)(?!\\-\\w+)"
+        },
+        {
+            "name": "entity.name.type",
+            "match": "(?<!(?:\\w+|\\-))(?:\\d-)*[A-Z]\\w*(?:\\-\\w+)*[!?]?"
+        },
+        {
+            "name": "variable.other",
+            "match": "\\w+(?:\\-\\w+)*[!?]?"
+        },
+        {
+            "name": "entity.name",
+            "match": "\\[\\w+(?:\\-\\w+)*[!?]?\\]"
+        }
+    ],
+    "repository": {}
+}
